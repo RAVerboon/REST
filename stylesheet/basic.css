@@ -1,7 +1,93 @@
-* {margin: 0; padding; 0}
+* {margin: 0; padding: 0;}
 
-h1, h2, h3, h4, h5, h6 {
-	color: #F0F;
+body {
+	background: url('../bg-dark.jpg');
+	background-position: center;
+	background-size: cover;
+}
+
+header {
+	width: 100%;
+	display: block;
+	height: 100%;
+
+	text-align: center;
+
+	color: #FFF;
+}
+
+#headerList{
+	margin: 1.75em auto;
+	font-family: 'Helvetica Neue' sans-serif;
+
+	display: block;
+	list-style: none;
+
+	text-align: center;
+}
+
+#headerList li {
+	display: inline-block;
+	text-align: center;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-weight: 800;
+
+	vertical-align: middle;
+}
+
+#headerList li a {
+	color: #787878;
+	text-decoration: none;
+}
+
+.seperator {
+	margin: 0 1em;
+	width: 0.5em;
+	height: 1.5em;
+	background: #37A;
+
+	display: inline-block;
+}
+
+#headerList li:hover {
+	text-decoration: underline;
+}
+
+#whatLink:hover #whatList {
+	display: block;
+}
+
+.subList {
+	font-family: 'Helvetica Neue' sans-serif;
+	font-weight: 400;
+	display: none;
+	list-style: none;
+	text-align: center;
+	font-size: 0.8em;
+}
+
+.subList .seperator {
+	width: 0.2em;
+	height: 1.4em;
+}
+
+.subList li {
+	display: inline-block;
+	line-height: 1.2em;
+	vertical-align: middle;
+}
+
+h1 {
+	margin-top: 3%;
+	font-family: "Helvetica Neue" sans-serif;
+	font-weight: 100;
+	font-size: 6em;
+	line-height: 130%;
+}
+
+h3 {
 	font-family: "Helvetica Neue" sans-serif;
 	font-weight: 200;
+	line-height: 2em;
 }
