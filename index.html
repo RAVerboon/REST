@@ -11,7 +11,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 	</head>
 	<body>
-		<header id="home">
+		<header>
+			<span id="home"></span><!-- home anchor -->
 			<div id="headerContent">
 				<h1>REST</h1>
 				<h3>REpresentational State Transfer</h3>
@@ -147,6 +148,7 @@
 				</div>
 			</section>
 		</main>
+		<div id="scrollToTop" title="Scroll to Top">^</div>
 		<footer>
 			
 		</footer>
@@ -199,8 +201,23 @@
 			$('a').click(function(){
 			    $('html, body').animate({
 			        scrollTop: $( $.attr(this, 'href') ).offset().top
-			    }, 500);
+			    }, 400);
 			    return false;
+			});
+			$('#scrollToTop').click(function () {
+				$('html, body').animate({
+					scrollTop: 0
+				}, 400);
+				return false;
+			});
+			$(document).scroll(function() {
+				var y = $(this).scrollTop();
+				if (y > (window.innerHeight * 1.1)) {
+					$('#scrollToTop').fadeIn();
+				}
+				else {
+					$('#scrollToTop').fadeOut();
+				}
 			});
 		</script>
 	</body>
