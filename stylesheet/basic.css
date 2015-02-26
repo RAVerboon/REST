@@ -1,4 +1,6 @@
-* {margin: 0; padding: 0;}
+/* Generic Styles */
+
+* {margin: 0; padding: 0; outline: 0;}
 
 body {
 }
@@ -19,6 +21,17 @@ header {
 
 	z-index: 0;
 }
+
+h1, h2, h3, h4, h5, h6 {
+	margin-top: 0.5em;
+	text-align: center;
+	font-family: 'Helvetica Neue', 'Helvetica';
+	font-weight: 200;
+
+	line-height: 130%;
+}
+
+/* Header Styles */
 
 #headerContent {
 	top: 50%;
@@ -75,10 +88,6 @@ header {
 	text-decoration: underline;
 }
 
-#whatLink:hover #whatList {
-	display: block;
-}
-
 .subList {
 	font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 	font-weight: 400;
@@ -99,6 +108,13 @@ header {
 	vertical-align: middle;
 }
 
+.subList li a {
+	color: #FFF;
+	text-decoration: none;
+}
+
+/* Main Styles */
+
 main {
 	top: 100%;
 	padding: 50px 0;
@@ -108,42 +124,91 @@ main {
 
 
 	background: #FFF;
-	box-shadow: 0px 0px 100px #000;
-
-	transition: box-shadow 0.5s;
+	box-shadow: 0px 0px 50px #000;
 
 	font-family: 'Helvetica';
 	font-size: 1.1em;
-	line-height: 160%;
+	line-height: 165%;
 }
 
-main:hover {
-	box-shadow: 0px 0px 100px #666;
-}
-
-main h1 {
-	font-size: 4em;
+main h2 {
+	font-size: 3.5em;
 	font-weight: 100;
 }
 
+main h3 {
+	font-size: 2.5em;
+	font-weight: 200;
+}
+
+main h4 {
+	font-weight: 800;
+	font-size: 1.2em;
+
+	text-align: left;
+}
+
+main h4::after {
+	content: "";
+	margin-top: 0.1em;
+	width: 100%;
+	height: 1px;
+	display: block;
+
+	background: #37a;
+}
+
 main section {
-	width: 80%;
+	max-width: 900px;
+	width: 90%;
 	margin: 0 auto;
 }
 
-@keyframes fadeShadow {
-  0% {
-    box-shadow: 0px -50px 30px #000;
-  }
-  100% {
-    box-shadow: 0px -50px 30px #F00;
-  }
+main ul {
+	margin-left: 1em;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	text-align: center;
-	font-family: 'Helvetica Neue', 'Helvetica';
-	font-weight: 200;
+#arrow {
+	position: absolute;
+	bottom: 1em;
+	left: 0;
+	right: 0;
+	font-size: 3em;
 
-	line-height: 130%;
+	-webkit-animation: arrowPad 5s infinite;
+	animation: arrowPad 5s infinite;
+	-moz-animation: arrowPad 5s infinite;
+
+	font-family: 'Helvetica';
+}
+
+#arrow: hover {
+	-webkit-animation-duration: 1.5s;
+			animation-duration: 1.5s;
+	   -moz-animation-duration: 1.5s;
+}
+
+#derivation div {
+	vertical-align: middle;
+}
+
+#derivation img {
+	float: right;
+}
+
+#arrow a {
+	color: #FFF;
+	text-decoration: none;
+}
+
+@keyframes arrowPad {
+	0% { bottom: 1.3em;}
+	50% { bottom: 1em;}
+	100% { bottom: 1.3em;}
+}
+
+@-webkit-keyframes arrowPad {
+	0% { bottom: 1.3em;}
+	50% { bottom: 1em;}
+	100% { bottom: 1.3em;}
 }

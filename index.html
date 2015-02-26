@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hoi</title>
+		<link rel="stylesheet" href="./stylesheet/basic.css">
+		<link rel="stylesheet" href="./stylesheet/animations.css">
+		<meta charset="UTF-8">
+		<!--jQuery-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<link rel="stylesheet" href="./stylesheet/jquery-ui.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+	</head>
+	<body>
+		<header id="home">
+			<div id="headerContent">
+				<h1>REST</h1>
+				<h3>REpresentational State Transfer</h3>
+				<ul id='headerList'>
+					<li><a href="#">Home</a></li>
+					<li class="seperator"></li>
+					<li><a href="#what" id="whatLink">Wat is REST?</a></li>
+					<li class="seperator"></li>
+					<li><a href="#alternatives" id="altLink">Alternatieven</a></li>
+					<li class="seperator"></li>
+					<li><a href="#origin" id="originLink">Ontstaan</a></li>
+					<li class="seperator"></li>
+					<li><a href="#app" id="appLink">Toepassingen</a></li>
+				</ul>
+				<ul id="homeList" class="subList" style='display:block;'>
+					<li></li>
+				</ul>
+				<ul id="whatList" class="subList">
+					<li><a href="#what">Inleiding</a></li>
+					<li class="seperator"></li>
+					<li><a href="#softwarearch">Softwarearchitectuur</a></li>
+					<li class="seperator"></li>
+					<li><a href="#structure">Stapsgewijze opbouw</a></li>
+					<li class="seperator"></li>
+					<li>REST leuk</li>
+				</ul>
+				<ul id="altList" class="subList">
+					<li>Inleiding</li>
+					<li class="seperator"></li>
+					<li>SOAP</li>
+					<li class="seperator"></li>
+					<li>WSDL</li>
+				</ul>
+				<ul id="originList" class="subList">
+					<li>Heel</li>
+					<li class="seperator"></li>
+					<li>Vroegah</li>
+					<li class="seperator"></li>
+					<li>Er was eens</li>
+				</ul>
+				<ul id="appList" class="subList">
+					<li>Web services</li>
+					<li class="seperator"></li>
+					<li>Big Data</li>
+					<li class="seperator"></li>
+					<li>In de cloud</li>
+					<li class="seperator"></li>
+					<li>API</li>
+				</ul>
+			</div>
+			<span id="arrow"><a href="#what">v</a></span>
+		</header>
+		<main>
+			<section id="what">
+				<h2>Wat is REST?</h2>
+				<h3 id="softwarearch">Softwarearchitectuur</h3>
+				<p>
+					Volgens de definitie van Fielding is een software architectuur “een abstractie van de run-time elementen van een software systeem tijdens een fase van operatie.” De elementen zijn onderverdeeld in drie verschillende typen: componenten, data en connectors. We werken deze verschillende typen kort uit.</p>
+					<h4>Components</h4>
+					<p>De componenten van een software architectuur zijn elementen en instructies die data kunnen veranderen, die aangestuurd wordt door zijn eigen interface. Om dit concreet te maken een lijst met voorbeelden wat de functie van een component is:</p>
+					<ul>
+						<li>Berekeningen uitvoeren</li>
+						<li>Veranderen van een formaat</li>
+						<li>Samenvoegen met andere data</li>
+						<li>Genereren van data</li>
+					</ul>
+					<h4>Connectors</h4>
+					<p>De functie van connectors is simpel: het verbinden van verschillende componenten met elkaar. Het kan wel veranderingen doorvoeren op de data, maar niet op het niveau van de echte data. Zo kan het wel intern de data transformeren met het doel om de data beschikbaar en bruikbaar te maken voor de ontvanger. Zo is bijvoorbeeld het HTTP protocol een voorbeeld van een connector.</p>
+					<h4>Data</h4><p>
+					Data is wat verstuurd of ontvangen wordt door een component via een connector.</p>
+					<h4>Architecturale elementen</h4>
+					<p>
+					REpresentational State Transfer stijl is een abstractie van architecturale elementen in een gedistribueerd systeem. Perry en Wolf hebben drie klassen gedefinieerd voor architecturale elementen: componenten, data elementen en connectors. De REST stijl legt de focus op op de rol die de componenten spelen in plaats van de implementatie daarvan. </p>
+
+				</p>
+				<h3 id="structure">Stapsgewijze opbouw REST architectuur</h3>
+				<div id="derivation">
+					<!-- <ul>
+						<li><a href="#dvNull">1.Null style ➔</a></li>
+						<li><a href="#dvCS">2.Client-server ➔</a></li>
+						<li><a href="#dvStateless">3.Stateless ➔</a></li>
+						<li><a href="#dvCache">4.Cache ➔</a></li>
+						<li><a href="#dvUniform">5.Uniforme Interface ➔</a></li>
+						<li><a href="#dvLayered">6.Layered System ➔</a></li>
+						<li><a href="#dvCOD">7.Code on Demand ➔</a></li>
+						<li><a href="#dvSummary">8.Samenvatting</a></li>
+					</ul> -->
+					<h3>1.Null style ↓</h3>
+					<div id="dvNull">
+						<img src="./img/null.png" alt="null" title="null"/>
+						<p>Dit is het begin en uitgangspunt zonder enige restricties en regels. Hier worden langzaam maar zeker regels aan toegevoegd.</p>
+					</div>
+					<h3>2.Client-server ↓</h3>
+					<div id="dvCS">
+						<img src="./img/clientserver.png" alt="null" />
+						<p>De eerste constraint is die van het client-server model. Dit gaat uit van het principe dat de user interface afgesplitst is naar de client, zodat de server de focus kan leggen op het serveren van de data en de applicatie mobieler wordt. Een ander voordeel is dat beide kanten onafhankelijk verbeterd kunnen worden.</p>
+					</div>
+					<h3>3.Stateless ↓</h3>
+					<div id="dvStateless">
+						<img src="./img/stateless.png" alt="null" />
+						<p>Deze constraint zorgt ervoor dat de client de state zelf op moet bouwen, zodat de server hier geen informatie over hoeft op te slaan. Als de server hier geen informatie voor hoeft op te slaan is het mogelijk om requests onafhankelijk af te handelen wat voor minder interferentie zorgt, wat zorgt voor een betere schaalbaarheid. Toch heeft dit weer nadelen, zoals de mogelijke toename van netwerkgebruik. Aangezien de server de state niet onthoudt moet de client telkens de state meesturen als deze nodig is voor de server om de request af te handelen. Ook is het moeilijker voor de server om voor een consistente applicatie te zorgen aangezien de server hier geen controle over heeft.</p>
+					</div>
+					<h3>4.Cache ↓</h3>
+					<div id="dvCache">
+						<img src="./img/cache.png" alt="null" />
+						<p>Door het toevoegen van een cache is het mogelijk om de latency naar de server te verkleinen en minder resources nodig te moeten hebben om een request af te handelen. De server kan bepalen wat cacheable en niet-cacheable is, maar in veel gevallen moet de client zelf optimalisering doorvoeren, aangezien de server maar een beperkte controle hierover heeft. Het is namelijk mogelijk dat de server zegt dat een document cacheable is maar de client hier niets mee doet en constant een nieuwe request uitvoeren.</p>
+					</div>
+					<h3>5.Uniforme Interface ↓</h3>
+					<div id="dvUniform">
+						<img src="./img/uniform.png" alt="null" />
+						<p>Een uniforme interface zorgt ervoor dat het hele systeem versimpeld kan worden aangezien er geen extra gespecialiseerde versies voor bepaalde clients is. Dit heeft tot gevolg dat het overzichtelijker wordt. De REST interface is dus gespecialiseerd in het uitserveren van data naar grote hoeveelheden clients. De onafhankelijkheid van client en server zoals genoemd in punt twee wordt nu versterkt - aangezien de interface uniform is, is het mogelijk om aan beide kanten veranderingen en optimaliseringen door te voeren zonder dat dit direct de communicatie van beide componenten beïnvloedt. De nadelen van dit systeem is dat de efficiëntie minder wordt omdat er een gestandaardiseerde interface komt die mogelijk te veel of te weinig informatie aanlevert wat niet in het optimale formaat is voor de client.</p>
+					</div>
+					<h3>6.Layered System ↓</h3>
+					<div id="dvLayered">
+						<img src="./img/layered.png" alt="null" />
+						<p>Een layered system betekent dat de componenten in het systeem layered zijn, wat betekent dat de componenten op verschillende lagen geen weet hebben van de andere lagen. Dit kan gebruikt worden om nieuwe en oude systemen werkend te krijgen onder een enkele uniforme interface zoals beschreven in punt vijf. Het grootste nadeel hiervan is er een overhead komt en de performance voor de gebruiker vermindert.</p>
+					</div>
+					<h3>7.Code on Demand ↓</h3>
+					<div id="dvCOD">
+						<img src="./img/cod.png" alt="null" />
+						<p>Deze eigenschap zorgt ervoor dat een client code van de service kan halen om zelf uit te voeren. Zo is de server wel meer in controle - bijvoorbeeld om features dynamisch toe te kunnen voegen - maar wordt de service wel weer onduidelijker omdat de scheiding tussen client en server begint te vervagen. Daarom is deze eigenschap ook optioneel en is het niet ongebruikelijk om deze achterwege te laten.</p>
+					</div>
+					<h3>8.Samenvatting</h3>
+					<div id="dvSummary">
+						<p>Al deze eigenschappen bij elkaar gevoegd creëren een systeem dat bijzonder schaalbaar is en de nodige voor- en nadelen afweegt. De grootste voordelen op een rijtje:</p>
+						<ul>
+							<li>Portability</li>
+							<li>Extendibility</li>
+							<li>Scalability</li>
+							<li>Independency</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer>
+			
+		</footer>
+
+		<script>
+			$("#derivation").accordion({
+		    	heightStyle: "content"
+		    });
+		    $(document).tooltip();
+
+			// $("#headerList > li > a").each(function (index, element) {
+			// 	var href = element.attr("href");
+
+			// 	console.log(href);
+			// 	// element.hover(function () {
+
+			// 	// });
+			// });
+
+			$("#whatLink").hover(function() {
+				hideSubMenus();
+				$("#whatList").css('display', 'block');
+				$("#whatList").addClass('animated fadeInDown');
+			});
+			$("#altLink").hover(function() {
+				hideSubMenus();
+				$("#altList").css('display', 'block');
+				$("#altList").addClass('animated fadeInDown');
+			});
+			$("#originLink").hover(function() {
+				hideSubMenus();
+				$("#originList").css('display', 'block');
+				$("#originList").addClass('animated fadeInDown');
+			});
+			$("#appLink").hover(function() {
+				hideSubMenus();
+				$("#appList").css('display', 'block');
+				$("#appList").addClass('animated fadeInDown');
+			});
+
+			function hideSubMenus() {
+				var subMenus = document.getElementsByClassName("subList");
+				var i = 0;
+
+				for(i = 0; i < subMenus.length; i++) {
+					subMenus[i].style.display = 'none';
+				}
+			}
+
+			$('a').click(function(){
+			    $('html, body').animate({
+			        scrollTop: $( $.attr(this, 'href') ).offset().top
+			    }, 500);
+			    return false;
+			});
+		</script>
+	</body>
+</html>
