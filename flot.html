@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<title>Hoi</title>
+		<link rel="stylesheet" href="./stylesheet/basic.css">
+		<link rel="stylesheet" href="./stylesheet/animations.css">
+		<meta charset="UTF-8">
+		<!--jQuery-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<link rel="stylesheet" href="./stylesheet/jquery-ui.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+		<script src="flot/jquery.flot.js"></script>
+		<script src="flot/jquery.flot.time.js"></script>
+		<style>
+			#flot {
+				height: 600px;
+			}
+		</style>
+		<script>
+
+		function getCSV () {
+			var data1 = [];
+			var data2 = [];
+
+			$.get("report.csv", function (data) {
+				var lines = data.split('\n');
+
+				for (var i = 0; i < 100; i++) {
+					var line = lines[i].split(',');
+
+					// console.log(line[2]);
+
+					data1.push([i, parseInt(line[1])]);
+					data2.push([i, parseInt(line[2])]);
+				}
+			});
+
+			return {'d1': data1, 'd2': data2};
+		}
+
+		$(function() {
+			var csvData = getCSV();
+
+			// console.log(csvData.d1);
+
+			$.plot("#flot", [ {label: "d1", data: csvData.d1} ], {
+				xaxis: {
+					min: 0,
+					max: 500,
+					tickSize: 50
+				}, 
+
+				yaxis: {
+					min: 0,
+					max: 100,
+					tickSize: 5
+				}
+			});
+
+			// Add the Flot version string to the footer
+
+			// $("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+		});
+		</script>
+	</head>
+	<body>
+	<div id="flot"></div>
+	</body>
+</html>
