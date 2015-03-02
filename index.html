@@ -20,9 +20,9 @@
 				<ul id='headerList'>
 					<li><a href="#">Home</a></li>
 					<li class="seperator"></li>
-					<li><a href="#what" id="whatLink">Wat is REST?</a></li>
+					<li><a href="#what" id="whatLink">REST</a></li>
 					<li class="seperator"></li>
-					<li><a href="#alternatives" id="altLink">Alternatieven</a></li>
+					<li><a href="#soap" id="soapLink">SOAP</a></li>
 					<li class="seperator"></li>
 					<li><a href="#origin" id="originLink">Ontstaan</a></li>
 					<li class="seperator"></li>
@@ -32,18 +32,20 @@
 					<li></li>
 				</ul>
 				<ul id="whatList" class="subList">
-					<li><a href="#what">Inleiding</a></li>
-					<li class="seperator"></li>
 					<li><a href="#softwarearch">Softwarearchitectuur</a></li>
 					<li class="seperator"></li>
 					<li><a href="#structure">Stapsgewijze opbouw</a></li>
-					<li class="seperator"></li>
-					<li>REST leuk</li>
 				</ul>
-				<ul id="altList" class="subList">
-					<li>Inleiding</li>
+				<ul id="soapList" class="subList">
+					<li><a href="#whatIsSOAP">Wat is SOAP?</a></li>
 					<li class="seperator"></li>
-					<li>SOAP</li>
+					<li><a href="#componentsSOAP">Waaruit bestaat SOAP?</a></li>
+					<li class="seperator"></li>
+					<li><a href="#SOAPprocessing">Verwerking van SOAP</a></li>
+					<li class="seperator"></li>
+					<li><a href="#SOAPproscons">Voor- en nadelen SOAP</a></li>
+					<li class="seperator"></li>
+					<li><a href="#SOAPvsREST">SOAP vs. REST</a></li>
 				</ul>
 				<ul id="originList" class="subList">
 					<li>Heel</li>
@@ -146,6 +148,77 @@
 				</div>
 				<a href="http://www.google.nl/">hoi</a>
 			</section>
+			<section id="soap">
+				<h2 id="whatIsSOAP">Wat is SOAP?</h2>
+				<p>SOAP staat voor Simple Object Acces Protocol, en is na REST de populairste manier om met webservices te communiceren. SOAP is ontworpen door Microsoft in 1998. Maar werd door verschillende redenen binnen Microsoft pas in 1999 uitgegeven. In 2000 werd SOAP 1.1 uitgegeven door het World Wide Web Consortium (W3C). Tegenwoording wordt SOAP onderhouden en verder ontwikkeld door de XML Protocol Working Group van W3C. SOAP is ontworpen om erg uitbreidbaar te zijn. Men hoeft alleen maar de delen van SOAP te gebruiken die zij nodig hebben voor bepaalde taken. SOAP heeft bijvoorbeeld de optie voor extra beveiliging, maar die hoeft niet gebruikt te worden als het niet nodig is, bijvoorbeeld bij een message voor een simpele openbare tekstapplicatie. Echter zou deze extra beveiliging wel bijzonder handig zijn als de gegevens die worden verstuurd van een bank zijn. Een belangrijk onderdeel van SOAP is het ingebouwde fout afhandeling, als er een fout zou zijn in je requestmessage wordt in de response message een fout code en tekst toegevoegd waardoor je direct weet wat er aan de hand is. Doordat er standaard foutcodes worden gebruikt kan je in de code van je programma ook direct de fout laten afhandelen. Een andere interessante mogelijkheid van SOAP is dat je niet verplicht http als transport protocol hoef te gebruiken. Met SOAP kan je ook ander transport protocollen gebruiken, zoals SMTP of andere transport methodes.</p>
+				<p>In het kort samengevat zijn de drie belangrijkste eigenschappen van SOAP:</p>
+				<ul>
+				<li><h4>Uitbreidbaarheid</h4>SOAP is heeft heel erg veel mogelijkheden om uitgebreid te worden, bijvoorbeeld er kan extra beveiliging worden toegevoegd.</li>
+				<li><h4>Neutraliteit</h4>SOAP is niet alleen mogelijk op met één transport protocol, maar kan gebruikt worden met verschillende transport protocollen, zoals http en SMTP.</li>
+				<li><h4>Onafhankelijkheid</h4>SOAP kan gebruikt worden met verschillende programmeer talen, zoals PHP en .NET.</li>
+				</ul>
+				<h3 id="componentsSOAP">Waaruit bestaat SOAP?</h3>
+				<p>Het SOAP protocol bestaat uit drie delen:</p>
+				<ul>
+					<li>
+						<h4>Envelope</h4>
+						<p>Een SOAP bericht bestaat uit een envelope met daarin optioneel een header en altijd een body. De envelope moet altijd geassocieerd zijn met de namespace "http://schemas.xmlsoap.org/soap/envelope/". Is dit niet het geval dan word de message weggegooid.</p>
+						<ul>
+							<li>
+								<h5>Header</h5>
+								<p>De Header wordt gebruikt als een flexibel mechanisme voor het uitbreiden van een bericht zonder voorafgaande kennis tussen de communicerende partijen. In de header kan bijvoorbeeld transactie management of betaling worden geïmplementeerd.</p>
+							</li>
+							<li>
+								<h5>Body</h5>
+								<p>In de body staat informatie die voor de uiteindelijke ontvanger is bestemd, in de body staat dus de data die bijvoorbeeld is opgevraagd door iemand. Verder kan er in de body als er een fout is geweest ook nog wat extra informatie staan over deze fout, zoals de foutcode, en een leesbare beschrijving van de fout.</p>
+							</li>
+						</ul>
+					</li>
+					<li>	
+						<h4>Encoding Rules</h4>
+						<p>Een SOAP message is in XML geschreven echter zijn er wel nog meer beperkingen opgelegd aan hoe het geschreven mag worden.</p>
+					</li>
+					<li>	
+						<h4>RPC Representation</h4>
+						<p>Een belangrijk doel van SOAP is om Remote Procedure Calls uit te wisselen door gebruik van de flexibiliteit van XML, normaal gesproken worden RPC’s gedaan met een HTTP Request en HTTP Response, maar met SOAP hoeft dit niet via http, omdat SOAP ook van andere transfer protocols gebruik kan maken zoals het Simple Mail Transfer Protocol.</p>
+					</li>
+				</ul>
+				<h3 id="SOAPprocessing">Verwerking van SOAP</h3>
+				<p>Als een SOAP applicatie een SOAP message ontvangt, wordt dit bericht dit bericht geprocesseerd worden dit gebeurd in een bepaalde volgorde:</p>
+				<div id="soapProcessingList">
+					<h3>1. Identificatie ↓</h3>
+					<div>Als eerste moet de applicatie alle delen van de SOAP message identificeren die voor de applicatie bedoeld zijn, het zou namelijk kunnen dat de SOAP message nog verder moet worden gestuurd.</div>
+					<h3>2. Verificatie ↓</h3>
+					<div>Hierna moet de applicatie verifiëren dat al deze delen worden ondersteund door de applicatie, is dit het geval dan kunnen deze op de juiste manier worden geprocesseerd. Is dit echter niet het geval en ondersteund de applicatie de delen niet, dan word de message weggegooid.</div>
+					<h3>3. Afhandeling</h3>
+					<div>Deze laatste stap gebeurt alleen als deze applicatie niet de eindbestemming is van de SOAP message. Als de SOAP message nog verder moet gaan worden alle delen verwijdert die bij stap 1 waren geidentificeerd, omdat deze alleen voor deze applicatie waren bestemd. Hierna kan de message geforward worden.</div>
+				</div>
+				<h3 id="SOAPproscons">Voor- en nadelen van SOAP</h3>
+				<h4>Voordelen:</h4>
+				<ul>
+					<li>Het is te gebruiken op meerdere platforms en kan ook gebruikt worden met verschillende programmeer talen.</li>
+					<li>SOAP geeft makkelijkere communicatie door proxies en firewalls.</li>
+					<li>Het kan gebruikt worden met verschillende transportprotocollen, waarvan de bekendste http en SMTP zijn, maar het kan ook met andere transportprotocollen gebruikt worden.</li>
+				</ul>
+				<h4>Nadelen:</h4>
+				<ul>
+					<li>SOAP is over het algemeen langzamer concurrenten, omdat SOAP gebruikt maakt van XML waarin meer informatie is toegevoegd dan echt nodig is. Hierdoor zijn de messages groter en duurt het dus langer om deze te versturen en te verwerken. Dit is een belangrijke reden waardoor tegenwoordig veel meer mensen gebruik maken van REST</li>
+					<li>SOAP wordt niet door alle programmeertalen even sterk ondersteund. Python en PHP worden bijvoorbeeld niet even goed ondersteund als Java en .NET.</li>
+				</ul>
+				<h3 id="SOAPvsREST">SOAP vs. REST</h3>
+				<h4>SOAP is heavyweight, en voor veel mensen lastig te gebruiken.</h4>
+				<ul>
+					<li>SOAP kan meerdere transportprotocolllen gebruiken zoals http en SMTP, REST alleen http</li>
+					<li>Makkelijk uit te breiden</li>
+					<li>Built-in error handling zodat wanneer er een error is de ontvanger direct een idee heeft wat het probleem is.</li>
+				</ul>
+				<h4>REST is meer lightweight, en makkelijk te gebruiken en is flexibeler.</h4>
+				<ul>
+					<li>Makkelijker te leren</li>
+					<li>Efficiënter, kan verschillende dataformaten gebruiken zoals JSON waardoor het bestand kleiner is. SOAP kan alleen XML gebruiken waar allerlei toegevoegde informatie zit die niet relevant is voor de ontvanger.</li>
+					<li>Snel, geen uitgebreide verwerking nodig, maar toch de mogelijkheid voor grootschaligheid</li>
+				</ul>
+			</section>
 			<section id="flickr">
 				<h2>Flickr Foto Feed</h2>
 				<form action="#">
@@ -174,8 +247,8 @@
 		<div id="topMenu">
 			<ul>
 				<li><a href="#">Home</a></li>
-				<li><a href="#what">Wat is REST?</a></li>
-				<li><a href="#alt">Alternatieven</a></li>
+				<li><a href="#what">REST</a></li>
+				<li><a href="#soap">SOAP</a></li>
 				<li><a href="#origin">Onstaan</a></li>
 				<li><a href="#">Toepassingen</a></li>
 			</ul>

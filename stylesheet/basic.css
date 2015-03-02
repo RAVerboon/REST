@@ -159,6 +159,12 @@ main h4::after {
 	background: #37a;
 }
 
+main h5 {
+	text-align: left;
+	font-weight: 800;
+	font-size: 1.1em;
+}
+
 main section {
 	max-width: 900px;
 	width: 90%;

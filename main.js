@@ -2,6 +2,9 @@ $(function () {
 	$("#derivation").accordion({
 		heightStyle: "content"
 	});
+	$("#soapProcessingList").accordion({
+		heightStyle: "content"
+	});
 	$(document).tooltip();
 
 	$("#whatLink").hover(function() {
@@ -9,10 +12,10 @@ $(function () {
 		$("#whatList").css('display', 'block');
 		$("#whatList").addClass('animated fadeInDown');
 	});
-	$("#altLink").hover(function() {
+	$("#soapLink").hover(function() {
 		hideSubMenus();
-		$("#altList").css('display', 'block');
-		$("#altList").addClass('animated fadeInDown');
+		$("#soapList").css('display', 'block');
+		$("#soapList").addClass('animated fadeInDown');
 	});
 	$("#originLink").hover(function() {
 		hideSubMenus();
@@ -33,9 +36,11 @@ $(function () {
 	$(document).scroll(function() {
 		var y = $(this).scrollTop();
 		if (y > (window.innerHeight * 1.3)) {
+			$("#topMenu").stop();
 			$('#topMenu').fadeIn();
 		}
 		else {
+			$("#topMenu").stop();
 			$('#topMenu').fadeOut();
 		}
 	});
