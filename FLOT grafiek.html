@@ -1,0 +1,208 @@
+<html>
+	<head>
+		<title>Hoi</title>
+		<link rel="stylesheet" href="./stylesheet/basic.css">
+		<link rel="stylesheet" href="./stylesheet/animations.css">
+		<meta charset="UTF-8">
+		<!--jQuery-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<link rel="stylesheet" href="./stylesheet/jquery-ui.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+		<script src="flot/jquery.flot.js"></script>
+		<script src="flot/jquery.flot.time.js"></script>
+		
+	</head>
+	<body>
+<style type="text/css">
+#flotgraph {
+    width: 1000px;
+    height: 700px;
+    text-align: center;
+    margin: 0 auto;
+}
+.legend table, .legend > div {
+    height: 80px ;
+    opacity: 1 ;
+    right: 10px;
+    top: 10px;
+    width: 100px ;
+}
+ 
+.legend table {
+    border: 1px solid #555;
+    padding: 5px;
+}
+#flot-tooltip { <!--moet verandert worden-->
+    font-size: 12px;
+    font-family: Verdana, Arial, sans-serif;
+    position: absolute;
+    display: none;
+    border: 2px solid;
+    padding: 2px;
+    background-color: #FFF;
+    opacity: 0.8;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+}
+</style>
+<script>
+var d1 = [[1262304000000, 12], [1264982400000, 13], [1267401600000, 15], [1270080000000, 18], [1272672000000, 23], [1275350400000, 27], [1277942400000, 30], [1280620800000, 30], [1283299200000, 27], [1285891200000, 22], [1288569600000, 16], [1291161600000, 13]];
+var d2 = [[1262304000000, 6], [1264982400000, 7], [1267401600000, 12], [1270080000000, 16], [1272672000000, 20], [1275350400000, 23], [1277942400000, 25], [1280620800000, 24], [1283299200000, 21], [1285891200000, 16], [1288569600000, 10], [1291161600000, 7]];
+
+var data = [
+    {label: "Data 1",  data: d1, color: '#999999'},
+    {label: "Data 2",  data: d2, color: '#000000'}
+];
+$(document).ready(function () {
+    $.plot($("#flotgraph"), data, {
+		xaxis: {
+			mode: "time",
+			tickSize: [52, "jaar"],
+			jaarNames: ["2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014"]
+		},
+		grid: {
+			hoverable: true,
+            borderWidth: 1
+        },
+        legend: {
+            labelBoxBorderColor: "none",
+            position: "right"
+        }
+	});
+function getMonthName(numericMonth) {
+    var monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var alphaMonth = monthArray[numericMonth];
+ 
+    return alphaMonth;
+}
+ 
+function convertToDate(timestamp) {
+    var newDate = new Date(timestamp);
+    var dateString = newDate.getMonth();
+    var monthName = getMonthName(dateString);
+ 
+    return monthName;
+}
+ function showTooltip(x, y, contents, z) {
+    $('<div id="flot-tooltip">' + contents + '</div>').css({
+        top: y - 70,
+        left: x - 20,
+        'border-color': z,
+    }).appendTo("body").fadeIn(100);
+}
+$("#flotgraph").bind("plothover", function (event, pos, item) {
+    if (item) {
+        if ((previousPoint != item.dataIndex) || (previousLabel != item.series.label)) {
+            previousPoint = item.dataIndex;
+            previousLabel = item.series.label;
+ 
+            $("#flot-tooltip").remove();
+ 
+            //var x = convertToDate(item.datapoint[0]),
+            y = item.datapoint[1];
+            z = item.series.color;
+ 
+            showTooltip(item.pageX, item.pageY,
+                "<b>" + item.series.label + "</b><br /> " + "hoi" + " = " + y + "mm",
+                z);
+        }
+    } else {
+        $("#flot-tooltip").remove();
+        previousPoint = null;
+    }
+});
+});
+
+/*
+$(document).ready(function() {
+    $.ajax({
+        type: "GET",
+        url: "report.csv",
+        dataType: "text",
+        success: function(data)(CSVToArray(data);
+		
+     });
+});
+function test(data){
+//var flotdata = CSVToArray(data);
+CSVToArray(data);
+//alert(flotdata);
+}
+function CSVToArray( strData, strDelimiter ){
+        strDelimiter = (strDelimiter || ",");
+
+        // Create a regular expression to parse the CSV values.
+        var objPattern = new RegExp(
+            (
+                // Delimiters.
+                "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+
+                // Quoted fields.
+                "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+
+                // Standard fields.
+                "([^\"\\" + strDelimiter + "\\r\\n]*))"
+            ),
+            "gi"
+            );
+
+
+        // Create an array to hold our data. Give the array
+        // a default empty first row.
+        var arrData = [[]];
+
+        // Create an array to hold our individual pattern
+        // matching groups.
+        var arrMatches = null;
+
+
+        // Keep looping over the regular expression matches
+        // until we can no longer find a match.
+        while (arrMatches = objPattern.exec( strData )){
+
+            // Get the delimiter that was found.
+            var strMatchedDelimiter = arrMatches[ 1 ];
+
+            // Check to see if the given delimiter has a length
+            // (is not the start of string) and if it matches
+            // field delimiter. If id does not, then we know
+            // that this delimiter is a row delimiter.
+            if (
+                strMatchedDelimiter.length &&
+                strMatchedDelimiter !== strDelimiter
+                ){
+
+                // Since we have reached a new row of data,
+                // add an empty row to our data array.
+                arrData.push( [] );
+            }
+            var strMatchedValue;
+            // Now that we have our delimiter out of the way,
+            // let's check to see which kind of value we
+            // captured (quoted or unquoted).
+            if (arrMatches[ 2 ]){
+                // We found a quoted value. When we capture
+                // this value, unescape any double quotes.
+                strMatchedValue = arrMatches[ 2 ].replace(
+                    new RegExp( "\"\"", "g" ),
+                    "\""
+                    );
+            } else {
+                // We found a non-quoted value.
+                strMatchedValue = arrMatches[ 3 ];
+            }
+            // Now that we have our value string, let's add
+            // it to the data array.
+            arrData[ arrData.length - 1 ].push( strMatchedValue );
+        }
+        // Return the parsed data.
+        alert( arrData );
+    }
+*/
+</script>
+	<div id="flotgraph"></div>
+	</body>
+</html>
+	
