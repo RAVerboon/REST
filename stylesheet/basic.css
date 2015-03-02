@@ -169,6 +169,19 @@ main ul {
 
 }
 
+main a {
+	color: #37a;
+	text-decoration: none;
+}
+
+main a:hover {
+	text-decoration: underline;
+}
+
+main a:visited {
+	color: #15639F;
+}
+
 footer {
 	width: 100%;
 	height: 10em;
@@ -206,6 +219,34 @@ footer {
 
 #derivation img {
 	float: right;
+}
+
+#flickrSearch {
+	width: 50%;
+	float: right;
+}
+
+#flickrPhotos {
+	display: inline-block;
+	width: auto;
+	margin: 0 auto;
+}
+
+.flickrLink {
+	padding: 5px;
+	margin: 10px;
+	width: 150px;
+	height: 150px;
+	display: inline-block;
+	box-shadow: 0px 0px 1px #000;
+	background: #FFF;
+
+	transition: all 0.5s;
+}
+
+.flickrLink:hover {
+	box-shadow: 0px 0px 2px #000;
+	background: #EEE;
 }
 
 #arrow a {

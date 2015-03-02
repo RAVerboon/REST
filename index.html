@@ -9,6 +9,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<link rel="stylesheet" href="./stylesheet/jquery-ui.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+		<script src="./main.js"></script>
 	</head>
 	<body>
 		<header>
@@ -143,6 +144,21 @@
 						</ul>
 					</div>
 				</div>
+				<a href="http://www.google.nl/">hoi</a>
+			</section>
+			<section id="flickr">
+				<h2>Flickr Foto Feed</h1>
+				<form action="#">
+				<label for="search">Zoekterm:</label>
+				<select name="search" id="flickrSearch">
+					<option value="rest+api">REST API</option>
+					<option value="webservice">Webservice</option>
+					<option value="potato">Aardappel</option>
+				</select>
+				</form>
+				<div id="flickrPhotos">
+
+				</div>
 			</section>
 			<footer>
 				<div id="footerContent">
@@ -163,72 +179,5 @@
 				<li><a href="#">Toepassingen</a></li>
 			</ul>
 		</div>
-		<script>
-			$("#derivation").accordion({
-		    	heightStyle: "content"
-		    });
-		    $(document).tooltip();
-
-			$("#whatLink").hover(function() {
-				hideSubMenus();
-				$("#whatList").css('display', 'block');
-				$("#whatList").addClass('animated fadeInDown');
-			});
-			$("#altLink").hover(function() {
-				hideSubMenus();
-				$("#altList").css('display', 'block');
-				$("#altList").addClass('animated fadeInDown');
-			});
-			$("#originLink").hover(function() {
-				hideSubMenus();
-				$("#originList").css('display', 'block');
-				$("#originList").addClass('animated fadeInDown');
-			});
-			$("#appLink").hover(function() {
-				hideSubMenus();
-				$("#appList").css('display', 'block');
-				$("#appList").addClass('animated fadeInDown');
-			});
-
-			function hideSubMenus() {
-				var subMenus = document.getElementsByClassName("subList");
-				var i = 0;
-
-				for(i = 0; i < subMenus.length; i++) {
-					subMenus[i].style.display = 'none';
-				}
-			}
-
-			this.generateSources();
-
-			function generateSources() {
-				$(".source").each(function (index, element) {
-					console.log(element.html);
-					$("#bronnen").html = element.html;
-				});
-			}
-
-			$('a').click(function(){
-			    $('html, body').animate({
-			        scrollTop: $( $.attr(this, 'href') ).offset().top
-			    }, 400);
-			});
-			$('#scrollToTop').click(function () {
-				$('html, body').animate({
-					scrollTop: 0
-				}, 400);
-			});
-			$(document).scroll(function() {
-				var y = $(this).scrollTop();
-				if (y > (window.innerHeight * 1.3)) {
-					$('#topMenu').fadeIn();
-				}
-				else {
-					$('#topMenu').fadeOut();
-				}
-			});
-
-			//Bronnen dynamisch toevoegen
-		</script>
 	</body>
 </html>
