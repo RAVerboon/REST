@@ -30,11 +30,6 @@ $(function () {
 	        scrollTop: $( $.attr(this, 'href') ).offset().top
 	    }, 400);
 	});
-	$('#scrollToTop').click(function () {
-		$('html, body').animate({
-			scrollTop: 0
-		}, 400);
-	});
 	$(document).scroll(function() {
 		var y = $(this).scrollTop();
 		if (y > (window.innerHeight * 1.3)) {
@@ -51,7 +46,9 @@ $(function () {
 		}
 	});
 
-	loadFlickrImages('webservice');
+	$("#flickrSearch-button").css('float', 'right');
+
+	loadFlickrImages('rest+api');
 });
 
 function hideSubMenus() {
@@ -66,7 +63,7 @@ function hideSubMenus() {
 function loadFlickrImages(search) {
 	$("#flickrPhotos").html('');
 
-	$.getJSON('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=3c195123945140651a8151c7d4cfbd0b&text=' + search + '&per_page=10&format=json&nojsoncallback=1', function (data) {
+	$.getJSON('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=3c195123945140651a8151c7d4cfbd0b&text=' + search + '&sort=interestingness-desc&per_page=10&format=json&nojsoncallback=1', function (data) {
 		$.each( data.photos.photo, function (key, val) {
 			var baseLink = 'https://farm' + val.farm + '.staticflickr.com/' + val.server + '/' + val.id + '_' + val.secret;
 			$("#flickrPhotos").append('<a href="' + baseLink + '.jpg" class="flickrLink" target="_blank"><img src="' + baseLink + '_q.jpg" alt="hoi" /></a>');
