@@ -14,6 +14,7 @@
 			#flot {
 				height: 300px;
 				width: 700px;
+				font-family: 'Helvetica';
 			}
 			.legend table, .legend > div  {
 				height: 80px ;
@@ -24,52 +25,53 @@
 				border: 2px solid #555;
 				padding: 5px;
 				background-color: #ffffff;
+				font-family: 'Helvetica';
 			}
 			#flot-tooltip {
 				font-size: 12px;
 				font-family: Verdana, Arial, sans-serif;
 				position: absolute;
 				display: none;
-				border: 2px solid;
-				padding: 2px;
-				background-color: #FFF;				
-				border-radius: 5px;
+				border: 1px solid;
+				padding: 5px;
+				background-color: #FFF;
 			}
 		</style>
 		<script>
 
-		function getCSV () {
+		function initFlot () {
 			var data1 = [];
 			var data2 = [];
 
 			$.get("report.csv", function (data) {
 				var lines = data.split('\n');
 
-				for (var i = 0; i < lines.length; i++) {
+				for (var i = 0; i < lines.length; i += 1) {
 					var line = lines[i].split(',');
-
+					var date = line[0].split(' - ');
 					// console.log(line[2]);
+					var myDate = date[0];
+					myDate=myDate.split("-");
+					var newDate=myDate[0]+"/"+myDate[1]+"/"+myDate[2];
 
-					data1.push([i, parseInt(line[1])]);
-					data2.push([i, parseInt(line[2])]);
+					console.log(newDate);
+
+					data1.push([new Date(newDate).getTime(), parseInt(line[1])]);
+					data2.push([new Date(newDate).getTime(), parseInt(line[2])]);
 				}
 				var data = [
-				{label: "SOAP",  data: data1, color: '#ff6600'},
-				{label: "REST",  data: data2, color: '#0000ff'}];
+				{label: "SOAP",  data: data1, color: '#FFAD40'},
+				{label: "REST",  data: data2, color: '#37A'}];
 
 				$.plot(("#flot"), data,  {
 					xaxis: {
-						min: 0,
-						max: 500,
-						tickSize: 50,
-						// ticks geeft jaar waarde weer, op het moment in csv dat jaar verandert.
-						ticks: [[0,'2005'],[21,'2006'], [73,'2007'], [126,'2008'], [178,'2009'], [230,'2010'], [282,'2011'], [334,'2012'], [387,'2013'], [439,'2014'], [491,'2015']]    
+						mode: 'time' 
 					}, 
 
 					yaxis: {
 						min: 0,
 						max: 100,
-						tickSize: 5
+						tickSize: 10
 					},
 					legend: {
 						labelBoxBorderColor: "none",
@@ -92,11 +94,12 @@
 					if (item) {				
  							$("#flot-tooltip").remove();
 							
-							date = item.datapoint[0]; // bij tijd zorgen dat dit datum word/ periode, of verwijderen
-							value = item.datapoint[1];
-							color = item.series.color;
+							var date = new Date(item.datapoint[0]); // bij tijd zorgen dat dit datum word/ periode, of verwijderen
+							date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+							var value = item.datapoint[1];
+							var color = item.series.color;
  
-							showTooltip(item.pageX, item.pageY,	 date + "<br />" + "<b>" + item.series.label + "</b> = " + value, color);
+							showTooltip(item.pageX, item.pageY,	 date + "<br />" + "<b>" + item.series.label + "</b> = " + value + '%', color);
 						
 					} else {
 						$("#flot-tooltip").remove();
@@ -108,17 +111,7 @@
 
 		$(function() {
 			
-			var csvData = getCSV();
-
-			// console.log(csvData.d1);
-
-			// console.log(csvData);
-			// console.log(csvData.length);
-
-			// var otherd = [[0,0], [500,100]];
-
-			
-
+			initFlot();
 		});
 		</script>
 	</head>

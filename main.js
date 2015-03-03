@@ -68,7 +68,7 @@ function hideSubMenus() {
 function loadFlickrImages(search) {
 	$("#flickrPhotos").html('');
 
-	$.getJSON('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=3c195123945140651a8151c7d4cfbd0b&text=' + search + '&sort=interestingness-desc&per_page=10&format=json&nojsoncallback=1', function (data) {
+	$.getJSON('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=c976425001782b9e0bef4353505cb095&text=' + search + '&sort=interestingness-desc&per_page=10&format=json&nojsoncallback=1', function (data) {
 		$.each( data.photos.photo, function (key, val) {
 			var baseLink = 'https://farm' + val.farm + '.staticflickr.com/' + val.server + '/' + val.id + '_' + val.secret;
 			$("#flickrPhotos").append('<a href="' + baseLink + '.jpg" class="flickrLink" target="_blank"><img src="' + baseLink + '_q.jpg" alt="hoi" /></a>');
